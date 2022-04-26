@@ -1,0 +1,30 @@
+public class Employee 
+{
+	private int employeeNumber;
+	private String employeeName;
+	private int employeeSalary;
+	
+	Employee(int employeeNumber, String employeeName, int employeeSalary)      //constructor
+	{
+		this.employeeNumber=employeeNumber;
+		this.employeeName=employeeName;
+		this.employeeSalary=employeeSalary;
+	}
+	public int getEmpno()
+	{
+		return employeeNumber;
+	}
+	public String getEname()
+	{
+		return employeeName;
+	}
+	public int getSalary()
+	{
+		return employeeSalary;
+	}
+
+	public String toString() 
+	{
+		return employeeNumber+" " +employeeName+ " "+employeeSalary ;
+	}
+}
