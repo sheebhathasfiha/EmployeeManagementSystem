@@ -1,0 +1,155 @@
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Scanner;
+
+class EmployeeManagementSystem 
+{
+	static String url="jdbc:mysql://localhost:3306/EmployeeCrud";
+    static String userName="root";
+    static String password="Aspire@123";
+	
+		ArrayList<Employee> detailsArray=new ArrayList<Employee>();
+		Scanner scanner=new Scanner(System.in);
+		Scanner scannerobject=new Scanner(System.in);
+		public void getOption()
+		{
+			int choice;
+			System.out.println("Welcome!!!\n Enter your choice\n-----------------");
+			try
+			{
+				Thread.sleep(500);
+			}
+			catch(InterruptedException interruptedException)
+			{
+				System.out.println(interruptedException);
+			}
+			do
+			{
+				System.out.println("1.INSERT");
+				System.out.println("2.DISPLAY");
+				System.out.println("3.SEARCH");
+				System.out.println("4.DELETE");
+				System.out.println("5.UPDATE");
+				System.out.println("6.STOP");
+				System.out.println("Enter 1 to 6");
+				choice=scanner.nextInt();
+				switch(choice)
+				{
+					//create employee
+					case 1:
+						System.out.println("Enter employee Id :");
+						int empno=scanner.nextInt();
+						System.out.println("Enter employee Name :");
+						String ename=scannerobject.nextLine();
+						System.out.println("Enter employee Salary :");
+						int salary=scanner.nextInt();
+						detailsArray.add(new Employee(empno,ename,salary));
+						break;
+			
+						//display employee
+					case 2:
+						System.out.println("Employee Details are:\n---------------------------------------");
+						Iterator <Employee> i=detailsArray.iterator();
+						while(i.hasNext()) 
+						{
+							Employee e=i.next();
+							System.out.println(e);
+						}
+						System.out.println("---------------------------------------");
+						break;
+						//search employee
+					case 3:
+						boolean found=false;
+						System.out.println("Enter Employee to search :");
+						empno=scanner.nextInt();
+						System.out.println("---------------------------------------");
+						i=detailsArray.iterator();
+						while(i.hasNext()) 
+						{
+					
+							Employee e=i.next();
+							if(e.getEmpno() == empno)
+							{
+								System.out.println(e);
+								found=true;
+							}
+					
+						}
+						if(!found)
+						{
+							System.out.println("-----------Record not found------------");
+						}
+						System.out.println("---------------------------------------");
+						break;
+						//delete employee
+					case 4:
+						found=false;
+						System.out.println("Enter employee number that has to be deleted");
+						empno=scanner.nextInt();
+						System.out.println("------------------------------------------");
+						i=detailsArray.iterator();
+						while(i.hasNext())
+						{
+							Employee e=i.next();
+							if(e.getEmpno()==empno)
+							{
+								i.remove();
+								found=true;
+							}
+						}
+			
+						if(!found)
+						{
+							System.out.println("-------------Record not found--------------");
+						}
+						else
+						{
+							System.out.println("-----Record is deleted successfully------");
+						}
+						System.out.println("---------------------------------------");
+						break;
+						//update employee
+					case 5:
+						found=false;
+						System.out.println("----------------------------------");
+						System.out.println("Enter employee id that has to be updated");
+						empno=scanner.nextInt();
+						System.out.println("----------------------------------");
+						Iterator<Employee>i1=detailsArray.iterator();
+						while(i1.hasNext())
+						{
+							Employee e=i1.next();
+							if(e.getEmpno()==empno)
+							{
+								System.out.println("Enter new name:");
+								ename=scannerobject.nextLine();
+								System.out.println("Enter new salary:");
+								salary=scanner.nextInt();
+					
+								//i1.set(new Employee(empno,ename,salary));
+								found=true;
+							}
+						}
+			
+						if(!found)
+							System.out.println("---Record not found!!!---");
+						else
+							System.out.println("-------Record is updated successfully-------");
+						System.out.println("---------------------------------------");
+						break;
+			
+					case 6:
+						System.out.println("--Program Stoped--");
+				
+					default: 
+					{
+						System.out.println("***Enter option 1 to 6***");
+					}
+				}
+			}while(choice!=0); 
+		scanner.close();
+		scannerobject.close();
+		}
+	}
+
+
